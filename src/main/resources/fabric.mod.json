@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "beeangry-est",
+  "version": "$version",
+
+  "name": "Bee Angry-est",
+  "description": "Makes bees angrier!",
+  "authors": [
+    "Juuz"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Juuxel/BeeAngry-est",
+    "sources": "https://github.com/Juuxel/BeeAngry-est",
+    "issues": "https://github.com/Juuxel/BeeAngry-est/issues"
+  },
+
+  "license": "LGPL-3.0-only",
+  "icon": "assets/beeangry-est/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [{
+      "value": "juuxel.traversingdimensions.TraversingDimensions::init",
+      "adapter": "kotlin"
+    }]
+  },
+  "mixins": [
+    "mixins.traversingdimensions.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "minecraft": ">=1.15-",
+    "fabric": "*"
+  },
+  "suggests": {
+    "lil-tater": "*"
+  }
+}

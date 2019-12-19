@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "juuxel.traversingdimensions.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "InternalBiomeDataMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
