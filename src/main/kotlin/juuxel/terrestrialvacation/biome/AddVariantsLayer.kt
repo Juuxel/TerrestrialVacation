@@ -1,4 +1,4 @@
-package juuxel.traversingdimensions.biome
+package juuxel.terrestrialvacation.biome
 
 import net.fabricmc.fabric.impl.biome.InternalBiomeUtils
 import net.minecraft.util.registry.Registry

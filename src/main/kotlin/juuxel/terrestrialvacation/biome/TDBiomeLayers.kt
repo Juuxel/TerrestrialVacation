@@ -1,6 +1,6 @@
-package juuxel.traversingdimensions.biome
+package juuxel.terrestrialvacation.biome
 
-import juuxel.traversingdimensions.util.stack
+import juuxel.terrestrialvacation.util.stack
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.layer.*
 import net.minecraft.world.biome.layer.util.CachingLayerContext

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "beeangry-est",
+  "id": "terrestrial_vacation",
   "version": "$version",
 
-  "name": "Bee Angry-est",
+  "name": "Terrestrial Vacation",
   "description": "Makes bees angrier!",
   "authors": [
     "Juuz"
@@ -20,7 +20,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [{
-      "value": "juuxel.traversingdimensions.TraversingDimensions::init",
+      "value": "juuxel.terrestrialvacation.TerrestrialVacation::init",
       "adapter": "kotlin"
     }]
   },

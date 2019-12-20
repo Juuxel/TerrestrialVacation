@@ -1,4 +1,4 @@
-package juuxel.traversingdimensions.biome
+package juuxel.terrestrialvacation.biome
 
 import com.terraformersmc.traverse.biome.TraverseBiomes
 import net.minecraft.util.registry.Registry

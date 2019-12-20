@@ -1,4 +1,4 @@
-package juuxel.traversingdimensions.util
+package juuxel.terrestrialvacation.util
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback
 import net.minecraft.util.Identifier

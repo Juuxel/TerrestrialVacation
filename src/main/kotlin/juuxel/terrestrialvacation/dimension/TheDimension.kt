@@ -1,7 +1,7 @@
-package juuxel.traversingdimensions.dimension
+package juuxel.terrestrialvacation.dimension
 
-import juuxel.traversingdimensions.TraversingDimensions
-import juuxel.traversingdimensions.biome.TDBiomeSource
+import juuxel.terrestrialvacation.TerrestrialVacation
+import juuxel.terrestrialvacation.biome.TDBiomeSource
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.math.Vec3d
@@ -22,7 +22,7 @@ class TheDimension(world: World, private val type: DimensionType) : OverworldDim
     override fun createChunkGenerator(): ChunkGenerator<out ChunkGeneratorConfig> =
         OverworldChunkGenerator(
             world,
-            TDBiomeSource(TraversingDimensions.biomes, VanillaLayeredBiomeSourceConfig(world.levelProperties)),
+            TDBiomeSource(TerrestrialVacation.biomes, VanillaLayeredBiomeSourceConfig(world.levelProperties)),
             OverworldChunkGeneratorConfig()
         )
 
@@ -34,7 +34,7 @@ class TheDimension(world: World, private val type: DimensionType) : OverworldDim
             }
             .biomeAccessStrategy(HorizontalVoronoiBiomeAccessType.INSTANCE)
             .factory(::TheDimension)
-            .buildAndRegister(TraversingDimensions.id("dimension"))
+            .buildAndRegister(TerrestrialVacation.id("biome_rift"))
 
         fun init() {
 

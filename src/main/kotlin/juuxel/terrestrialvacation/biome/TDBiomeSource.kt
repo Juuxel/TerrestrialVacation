@@ -1,4 +1,4 @@
-package juuxel.traversingdimensions.biome
+package juuxel.terrestrialvacation.biome
 
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.source.BiomeLayerSampler

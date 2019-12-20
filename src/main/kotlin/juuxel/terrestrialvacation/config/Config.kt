@@ -1,4 +1,4 @@
-package juuxel.traversingdimensions.config
+package juuxel.terrestrialvacation.config
 
 import com.google.common.collect.ImmutableList
 import com.google.gson.GsonBuilder
