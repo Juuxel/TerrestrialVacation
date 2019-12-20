@@ -39,7 +39,15 @@ object TraversingDimensions {
             true,
             BiFunction { world, type ->
                 DimensionBuilder.create()
-                    .chunkGenerator { OverworldChunkGenerator(it, TDBiomeSource(biomes, VanillaLayeredBiomeSourceConfig(it.levelProperties)), OverworldChunkGeneratorConfig()) }
+                    .visibleSky(true)
+                    .fogColour(0xBB, 0xBB, 0xFF)
+                    .chunkGenerator {
+                        OverworldChunkGenerator(
+                            it,
+                            TDBiomeSource(biomes, VanillaLayeredBiomeSourceConfig(it.levelProperties)),
+                            OverworldChunkGeneratorConfig()
+                        )
+                    }
                     .build(world, type)
             },
             HorizontalVoronoiBiomeAccessType.INSTANCE

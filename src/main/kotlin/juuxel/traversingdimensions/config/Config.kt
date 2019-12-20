@@ -1,7 +1,7 @@
 package juuxel.traversingdimensions.config
 
 import com.google.common.collect.ImmutableList
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import net.fabricmc.loader.api.FabricLoader
@@ -31,7 +31,7 @@ data class Config(val blacklistedBiomes: List<Identifier> = DEFAULT_BLACKLIST) {
 
         fun load(): Config {
             val file = FabricLoader.getInstance().configDirectory.resolve("td_wip.json")
-            val gson = Gson()
+            val gson = GsonBuilder().setPrettyPrinting().create()
             return if (!file.exists()) {
                 val config = Config()
                 file.writer().use { gson.toJson(config.toJson(), it) }
