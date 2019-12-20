@@ -21,8 +21,7 @@ data class Config(val blacklistedBiomes: List<Identifier> = DEFAULT_BLACKLIST) {
         private val DEFAULT_BLACKLIST = ImmutableList.of(
             Identifier("terrestria", "caldera"),
             Identifier("terrestria", "caldera_beach"),
-            Identifier("terrestria", "caldera_foothills"),
-            Identifier("terrestria", "caldera_ridge")
+            Identifier("terrestria", "caldera_foothills")
         )
 
         fun fromJson(obj: JsonObject): Config {

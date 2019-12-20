@@ -33,7 +33,10 @@ object TDBiomeLayers {
         layer = AddDeepOceanLayer.INSTANCE.create(contextProvider.apply(4L), layer)
 
         var biomes: LayerFactory<R> = AddBiomesLayer(biomeList).create(contextProvider.apply(20L), layer)
-        biomes = ScaleLayer.NORMAL.stack(3, contextProvider, 1000L, biomes)
+        biomes = SetSpawnBiomeLayer.create(contextProvider.apply(1L), biomes)
+        biomes = ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes)
+        biomes = AddVariantsLayer.create(contextProvider.apply(30L), biomes)
+        biomes = EaseBiomeEdgeLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
         biomes = AddHillsLayer.INSTANCE.create(contextProvider.apply(100L), biomes, ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes))
         biomes = AddEdgeBiomesLayer.INSTANCE.create(contextProvider.apply(100L), biomes)
 
@@ -49,6 +52,7 @@ object TDBiomeLayers {
         var rivers: LayerFactory<R> = SimpleLandNoiseLayer.INSTANCE.create(contextProvider.apply(200L), layer)
         rivers = ScaleLayer.NORMAL.stack(4, contextProvider, 1000L, rivers)
         rivers = NoiseToRiverLayer.INSTANCE.create(contextProvider.apply(250L), rivers)
+        rivers = ScaleLayer.NORMAL.stack(3, contextProvider, 3000L, rivers)
         rivers = SmoothenShorelineLayer.INSTANCE.create(contextProvider.apply(1000L), rivers)
 
         biomes = SmoothenShorelineLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
