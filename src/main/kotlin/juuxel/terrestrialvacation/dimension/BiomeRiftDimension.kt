@@ -4,8 +4,9 @@ import juuxel.terrestrialvacation.TerrestrialVacation
 import juuxel.terrestrialvacation.biome.TerrestrialBiomeSource
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType
 import net.minecraft.block.pattern.BlockPattern
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
-import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 import net.minecraft.world.biome.source.HorizontalVoronoiBiomeAccessType
 import net.minecraft.world.biome.source.VanillaLayeredBiomeSourceConfig
@@ -27,13 +28,19 @@ class BiomeRiftDimension(world: World, private val type: DimensionType) : Overwo
         )
 
     companion object {
+        @JvmField
         val TYPE: DimensionType = FabricDimensionType.builder()
-            .defaultPlacer { teleported, destination, _, _, _ ->
-                val pos = Vec3d(teleported.x, destination.getTopY(Heightmap.Type.MOTION_BLOCKING, teleported.blockPos.x, teleported.blockPos.z).toDouble(), teleported.z)
-                BlockPattern.TeleportTarget(pos, Vec3d.ZERO, 0)
-            }
-            .biomeAccessStrategy(HorizontalVoronoiBiomeAccessType.INSTANCE)
             .factory(::BiomeRiftDimension)
+            .biomeAccessStrategy(HorizontalVoronoiBiomeAccessType.INSTANCE)
+            .defaultPlacer { teleported, destination, _, _, _ ->
+                BlockPos.PooledMutable.get(teleported.x, destination.height - 1.0, teleported.z).use { pos ->
+                    while (destination.isAir(pos) && pos.y > 0) {
+                        pos.setOffset(Direction.DOWN)
+                    }
+
+                    BlockPattern.TeleportTarget(Vec3d(pos), Vec3d.ZERO, 0)
+                }
+            }
             .buildAndRegister(TerrestrialVacation.id("biome_rift"))
 
         fun init() {
