@@ -1,7 +1,7 @@
 package juuxel.terrestrialvacation
 
 import juuxel.terrestrialvacation.config.Config
-import juuxel.terrestrialvacation.dimension.TheDimension
+import juuxel.terrestrialvacation.dimension.BiomeRiftDimension
 import juuxel.terrestrialvacation.util.visit
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -19,11 +19,11 @@ object TerrestrialVacation {
     fun init() {
         val config = Config.load()
         Registry.BIOME.visit { id, biome ->
-            if ((id.namespace == "traverse" || id.namespace == "terrestria") && id !in config.blacklistedBiomes) {
+            if ((id.namespace == "traverse" || id.namespace == "terrestria") && id !in config.blacklistedBaseBiomes) {
                 _biomes += biome
             }
         }
 
-        TheDimension.init()
+        BiomeRiftDimension.init()
     }
 }

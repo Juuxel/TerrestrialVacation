@@ -10,7 +10,7 @@ import net.minecraft.world.biome.layer.util.LayerSampler
 import net.minecraft.world.biome.source.BiomeLayerSampler
 import java.util.function.LongFunction
 
-object TDBiomeLayers {
+object TerrestrialBiomeLayers {
     private fun <R : LayerSampler, T : LayerSampleContext<R>> create(contextProvider: LongFunction<T>, biomeList: List<Biome>): LayerFactory<R> {
         var layer: LayerFactory<R> = ContinentLayer.INSTANCE.create(contextProvider.apply(1L))
         layer = ScaleLayer.FUZZY.create(contextProvider.apply(100L), layer)

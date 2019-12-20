@@ -1,7 +1,7 @@
 package juuxel.terrestrialvacation.dimension
 
 import juuxel.terrestrialvacation.TerrestrialVacation
-import juuxel.terrestrialvacation.biome.TDBiomeSource
+import juuxel.terrestrialvacation.biome.TerrestrialBiomeSource
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.util.math.Vec3d
@@ -16,13 +16,13 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig
 import net.minecraft.world.gen.chunk.OverworldChunkGenerator
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig
 
-class TheDimension(world: World, private val type: DimensionType) : OverworldDimension(world, type) {
+class BiomeRiftDimension(world: World, private val type: DimensionType) : OverworldDimension(world, type) {
     override fun getType() = type
 
     override fun createChunkGenerator(): ChunkGenerator<out ChunkGeneratorConfig> =
         OverworldChunkGenerator(
             world,
-            TDBiomeSource(TerrestrialVacation.biomes, VanillaLayeredBiomeSourceConfig(world.levelProperties)),
+            TerrestrialBiomeSource(TerrestrialVacation.biomes, VanillaLayeredBiomeSourceConfig(world.levelProperties)),
             OverworldChunkGeneratorConfig()
         )
 
@@ -33,7 +33,7 @@ class TheDimension(world: World, private val type: DimensionType) : OverworldDim
                 BlockPattern.TeleportTarget(pos, Vec3d.ZERO, 0)
             }
             .biomeAccessStrategy(HorizontalVoronoiBiomeAccessType.INSTANCE)
-            .factory(::TheDimension)
+            .factory(::BiomeRiftDimension)
             .buildAndRegister(TerrestrialVacation.id("biome_rift"))
 
         fun init() {

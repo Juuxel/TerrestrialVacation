@@ -7,11 +7,11 @@ import com.google.gson.JsonObject
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
-data class Config(val blacklistedBiomes: List<Identifier> = DEFAULT_BLACKLIST) {
+data class Config(val blacklistedBaseBiomes: List<Identifier> = DEFAULT_BLACKLIST) {
     fun toJson(): JsonObject =
         JsonObject().also { json ->
-            json.add("blacklistedBiomes", JsonArray().also {
-                for (biome in blacklistedBiomes) {
+            json.add("blacklistedBaseBiomes", JsonArray().also {
+                for (biome in blacklistedBaseBiomes) {
                     it.add(biome.toString())
                 }
             })
@@ -25,11 +25,11 @@ data class Config(val blacklistedBiomes: List<Identifier> = DEFAULT_BLACKLIST) {
         )
 
         fun fromJson(obj: JsonObject): Config {
-            return Config(blacklistedBiomes = obj.getAsJsonArray("blacklistedBiomes").map { Identifier(it.asString) })
+            return Config(blacklistedBaseBiomes = obj.getAsJsonArray("blacklistedBaseBiomes").map { Identifier(it.asString) })
         }
 
         fun load(): Config {
-            val file = FabricLoader.getInstance().configDirectory.resolve("td_wip.json")
+            val file = FabricLoader.getInstance().configDirectory.resolve("TerrestrialVacation.json")
             val gson = GsonBuilder().setPrettyPrinting().create()
             return if (!file.exists()) {
                 val config = Config()
