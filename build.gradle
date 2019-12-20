@@ -26,8 +26,6 @@ repositories {
         name = 'CurseForge'
         url = 'https://minecraft.curseforge.com/api/maven'
     }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -44,9 +42,6 @@ dependencies {
     modImplementation("com.terraformersmc:terrestria:$project.terrestria") {
         exclude group: "curse.maven"
     }
-
-    modImplementation "dev.vatuu:Tesseract-API:$project.tesseract"
-    include "dev.vatuu:Tesseract-API:$project.tesseract"
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
