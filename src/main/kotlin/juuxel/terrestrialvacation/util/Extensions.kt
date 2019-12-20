@@ -7,6 +7,7 @@ import net.minecraft.world.biome.layer.type.ParentedLayer
 import net.minecraft.world.biome.layer.util.LayerFactory
 import net.minecraft.world.biome.layer.util.LayerSampleContext
 import net.minecraft.world.biome.layer.util.LayerSampler
+import java.util.*
 import java.util.function.LongFunction
 
 inline fun <T> Registry<T>.visit(crossinline visitor: (Identifier, T) -> Unit) {
@@ -21,3 +22,5 @@ fun <R : LayerSampler, T : LayerSampleContext<R>> ParentedLayer.stack(times: Int
     (0 until times).fold(parent) { acc, i ->
         create(contextProvider.apply(initialSalt + i), acc)
     }
+
+fun <T> Optional<T>.orNull(): T? = orElse(null)

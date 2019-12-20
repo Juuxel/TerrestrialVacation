@@ -33,7 +33,6 @@ object TerrestrialBiomeLayers {
         layer = AddDeepOceanLayer.INSTANCE.create(contextProvider.apply(4L), layer)
 
         var biomes: LayerFactory<R> = AddBiomesLayer(biomeList).create(contextProvider.apply(20L), layer)
-        biomes = SetSpawnBiomeLayer.create(contextProvider.apply(1L), biomes)
         biomes = ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes)
         biomes = AddVariantsLayer.create(contextProvider.apply(30L), biomes)
         biomes = EaseBiomeEdgeLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)

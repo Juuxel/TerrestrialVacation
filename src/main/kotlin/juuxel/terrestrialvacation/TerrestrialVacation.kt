@@ -2,6 +2,7 @@ package juuxel.terrestrialvacation
 
 import juuxel.terrestrialvacation.config.Config
 import juuxel.terrestrialvacation.dimension.BiomeRiftDimension
+import juuxel.terrestrialvacation.lib.Lib
 import juuxel.terrestrialvacation.util.visit
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -24,6 +25,7 @@ object TerrestrialVacation {
             }
         }
 
+        Lib.init()
         BiomeRiftDimension.init()
     }
 }

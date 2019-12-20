@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "juuxel.terrestrialvacation.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PointOfInterestTypeAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
