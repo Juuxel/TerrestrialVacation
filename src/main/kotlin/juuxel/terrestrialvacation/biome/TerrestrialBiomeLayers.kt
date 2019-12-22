@@ -56,6 +56,7 @@ object TerrestrialBiomeLayers {
 
         biomes = SmoothenShorelineLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
         biomes = AddRiversLayer.INSTANCE.create(contextProvider.apply(102L), biomes, rivers)
+        biomes = IncreaseEdgeCurvatureLayer.INSTANCE.stack(3, contextProvider, 7L, biomes)
         biomes = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), biomes, oceanTemperature)
         return biomes
     }

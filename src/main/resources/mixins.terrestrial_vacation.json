@@ -3,7 +3,6 @@
   "package": "juuxel.terrestrialvacation.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PointOfInterestTypeAccessor"
   ],
   "client": [
   ],
