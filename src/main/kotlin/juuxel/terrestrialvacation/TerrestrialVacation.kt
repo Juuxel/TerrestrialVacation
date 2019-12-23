@@ -1,5 +1,6 @@
 package juuxel.terrestrialvacation
 
+import juuxel.terrestrialvacation.biome.Climates
 import juuxel.terrestrialvacation.config.Config
 import juuxel.terrestrialvacation.dimension.BiomeRiftDimension
 import juuxel.terrestrialvacation.lib.Lib
@@ -18,14 +19,22 @@ object TerrestrialVacation {
         Identifier(ID, path)
 
     fun init() {
-        val config = Config.load()
         Registry.BIOME.visit { id, biome ->
-            if ((id.namespace == "traverse" || id.namespace == "terrestria") && id !in config.blacklistedBaseBiomes) {
+            if (isValidBaseBiomeId(id)) {
                 _biomes += biome
             }
         }
 
         Lib.init()
         BiomeRiftDimension.init()
+        Climates.registerSpecialCases()
     }
+
+    fun isValidBaseBiomeId(id: Identifier?): Boolean =
+        id != null
+            && (id.namespace == "traverse" || id.namespace == "terrestria")
+            && id !in Config.INSTANCE.blacklistedBaseBiomes
+
+    fun isOtherBiome(id: Identifier?): Boolean =
+        id != null && id.namespace != "traverse" && id.namespace != "terrestria"
 }

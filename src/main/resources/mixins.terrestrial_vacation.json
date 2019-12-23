@@ -3,6 +3,7 @@
   "package": "juuxel.terrestrialvacation.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "OverworldBiomesMixin"
   ],
   "client": [
   ],

@@ -11,7 +11,7 @@ import net.minecraft.world.biome.source.BiomeLayerSampler
 import java.util.function.LongFunction
 
 object TerrestrialBiomeLayers {
-    private fun <R : LayerSampler, T : LayerSampleContext<R>> create(contextProvider: LongFunction<T>, biomeList: List<Biome>): LayerFactory<R> {
+    private fun <R : LayerSampler, T : LayerSampleContext<R>> create(contextProvider: LongFunction<T>): LayerFactory<R> {
         var layer: LayerFactory<R> = ContinentLayer.INSTANCE.create(contextProvider.apply(1L))
         layer = ScaleLayer.FUZZY.create(contextProvider.apply(100L), layer)
         layer = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(1L), layer)
@@ -23,16 +23,16 @@ object TerrestrialBiomeLayers {
         var oceanTemperature: LayerFactory<R> = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(10L))
         oceanTemperature = ScaleLayer.NORMAL.stack(6, contextProvider, 2001L, oceanTemperature)
 
-//        layer = AddColdClimatesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
+        layer = AddColdClimatesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
         layer = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(3L), layer)
-//        layer = AddClimateLayers.AddTemperateBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
-//        layer = AddClimateLayers.AddCoolBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
-//        layer = AddClimateLayers.AddSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
+        layer = AddClimateLayers.AddTemperateBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
+        layer = AddClimateLayers.AddCoolBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
+        layer = AddClimateLayers.AddSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(2L), layer)
         layer = ScaleLayer.NORMAL.stack(2, contextProvider, 2002L, layer)
         layer = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(4L), layer)
         layer = AddDeepOceanLayer.INSTANCE.create(contextProvider.apply(4L), layer)
 
-        var biomes: LayerFactory<R> = AddBiomesLayer(biomeList).create(contextProvider.apply(20L), layer)
+        var biomes: LayerFactory<R> = AddBiomesLayer.create(contextProvider.apply(20L), layer)
         biomes = ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes)
         biomes = AddVariantsLayer.create(contextProvider.apply(30L), biomes)
         biomes = EaseBiomeEdgeLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
@@ -61,6 +61,6 @@ object TerrestrialBiomeLayers {
         return biomes
     }
 
-    fun build(biomes: List<Biome>, seed: Long): BiomeLayerSampler =
-        BiomeLayerSampler(create(LongFunction { CachingLayerContext(25, seed, it) }, biomes))
+    fun build(seed: Long): BiomeLayerSampler =
+        BiomeLayerSampler(create(LongFunction { CachingLayerContext(25, seed, it) }))
 }
