@@ -32,8 +32,12 @@ object TerrestrialVacation {
 
     fun isValidBaseBiomeId(id: Identifier?): Boolean =
         id != null
-            && (id.namespace == "traverse" || id.namespace == "terrestria")
+            && isTerraformerBiome(id)
             && id !in Config.INSTANCE.blacklistedBaseBiomes
+
+    fun isTerraformerBiome(id: Identifier?): Boolean =
+        id != null
+            && (id.namespace == "traverse" || id.namespace == "terrestria")
 
     fun isOtherBiome(id: Identifier?): Boolean =
         id != null && id.namespace != "traverse" && id.namespace != "terrestria"

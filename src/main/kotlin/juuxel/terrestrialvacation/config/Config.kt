@@ -6,9 +6,13 @@ import com.google.gson.JsonObject
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
-data class Config(val blacklistedBaseBiomes: List<Identifier> = emptyList()) {
+data class Config(
+    @get:JvmName("isOverworldGenerationDisabled") val disableOverworldGeneration: Boolean = false,
+    val blacklistedBaseBiomes: List<Identifier> = emptyList()
+) {
     fun toJson(): JsonObject =
         JsonObject().also { json ->
+            json.addProperty("disableOverworldGeneration", disableOverworldGeneration)
             json.add("blacklistedBaseBiomes", JsonArray().also {
                 for (biome in blacklistedBaseBiomes) {
                     it.add(biome.toString())
@@ -33,7 +37,10 @@ data class Config(val blacklistedBaseBiomes: List<Identifier> = emptyList()) {
         }
 
         fun fromJson(obj: JsonObject): Config {
-            return Config(blacklistedBaseBiomes = obj.getAsJsonArray("blacklistedBaseBiomes").map { Identifier(it.asString) })
+            return Config(
+                disableOverworldGeneration = obj.getAsJsonPrimitive("disableOverworldGeneration").asBoolean,
+                blacklistedBaseBiomes = obj.getAsJsonArray("blacklistedBaseBiomes").map { Identifier(it.asString) }
+            )
         }
     }
 }

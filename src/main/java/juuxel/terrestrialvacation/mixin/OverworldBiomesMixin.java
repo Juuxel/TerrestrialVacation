@@ -2,6 +2,7 @@ package juuxel.terrestrialvacation.mixin;
 
 import juuxel.terrestrialvacation.TerrestrialVacation;
 import juuxel.terrestrialvacation.biome.Climates;
+import juuxel.terrestrialvacation.config.Config;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.util.Identifier;
@@ -19,6 +20,9 @@ public class OverworldBiomesMixin {
         Identifier id = Registry.BIOME.getId(biome);
         if (TerrestrialVacation.INSTANCE.isValidBaseBiomeId(id)) {
             Climates.INSTANCE.add(biome, climate, weight);
+            if (Config.get().isOverworldGenerationDisabled()) {
+                info.cancel();
+            }
         }
     }
 }
