@@ -22,12 +22,12 @@ object TerrestrialVacation {
         Registry.BIOME.visit { id, biome ->
             if (isValidBaseBiomeId(id)) {
                 _biomes += biome
+                Climates.checkSpecialCase(id, biome)
             }
         }
 
         Lib.init()
         BiomeRiftDimension.init()
-        Climates.registerSpecialCases()
     }
 
     fun isValidBaseBiomeId(id: Identifier?): Boolean =

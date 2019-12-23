@@ -4,14 +4,14 @@
   "version": "$version",
 
   "name": "Terrestrial Vacation",
-  "description": "Makes bees angrier!",
+  "description": "Take a vacation in a terrestrial world!",
   "authors": [
     "Juuz"
   ],
   "contact": {
-    "homepage": "https://github.com/Juuxel/BeeAngry-est",
-    "sources": "https://github.com/Juuxel/BeeAngry-est",
-    "issues": "https://github.com/Juuxel/BeeAngry-est/issues"
+    "homepage": "https://github.com/Juuxel/TerrestrialVacation",
+    "sources": "https://github.com/Juuxel/TerrestrialVacation",
+    "issues": "https://github.com/Juuxel/TerrestrialVacation/issues"
   },
 
   "license": "LGPL-3.0-only",
