@@ -7,15 +7,12 @@ import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.entity.EntityContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.dimension.DimensionType
 import java.util.*
@@ -35,22 +32,16 @@ class BiomeRiftPortalBlock(settings: Settings) : Block(settings) {
         return ActionResult.SUCCESS
     }
 
-    override fun getOutlineShape(state: BlockState, view: BlockView, pos: BlockPos, ePos: EntityContext) = SHAPE
-
     @Environment(EnvType.CLIENT)
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
         for (i in 1..(random.nextInt(3) + 3)) {
             world.addParticle(
                 ParticleTypes.PORTAL,
                 pos.x + random.nextDouble(),
-                pos.y + 0.8,
+                pos.y + 1.0,
                 pos.z + random.nextDouble(),
                 0.0, 1.0, 0.0
             )
         }
-    }
-
-    companion object {
-        private val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
     }
 }

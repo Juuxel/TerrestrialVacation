@@ -1,0 +1,2 @@
+- The classes in the `juuxel.terrestrialvacation.biome.fabric` package are from Fabric API, licensed under the Apache License.
+- The portal texture is an edited version of [Simple Void World's](https://github.com/modmuss50/SimpleVoidWorld) portal texture.

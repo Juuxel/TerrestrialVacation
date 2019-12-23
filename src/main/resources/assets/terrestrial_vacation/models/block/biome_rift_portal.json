@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_top",
+  "textures": {
+    "side": "terrestrial_vacation:block/biome_rift_portal",
+    "top": "terrestrial_vacation:block/biome_rift_portal_top"
+  }
+}

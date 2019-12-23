@@ -81,7 +81,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 jar {
-    from "COPYING", "COPYING.LESSER"
+    from "COPYING", "COPYING.LESSER", "CREDITS.md"
 }
 
 // configure the maven publication

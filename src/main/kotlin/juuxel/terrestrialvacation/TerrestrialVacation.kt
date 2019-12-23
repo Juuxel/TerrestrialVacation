@@ -1,6 +1,7 @@
 package juuxel.terrestrialvacation
 
 import juuxel.terrestrialvacation.biome.Climates
+import juuxel.terrestrialvacation.biome.RemoveUnwantedTheHallowBiomesLayer
 import juuxel.terrestrialvacation.config.Config
 import juuxel.terrestrialvacation.dimension.BiomeRiftDimension
 import juuxel.terrestrialvacation.lib.Lib
@@ -19,10 +20,12 @@ object TerrestrialVacation {
         Identifier(ID, path)
 
     fun init() {
-        Registry.BIOME.visit { id, biome ->
+        Registry.BIOME.visit { id, biome, rawId ->
             if (isValidBaseBiomeId(id)) {
                 _biomes += biome
                 Climates.checkSpecialCase(id, biome)
+            } else if (id.namespace == "thehallow") {
+                RemoveUnwantedTheHallowBiomesLayer.add(rawId)
             }
         }
 

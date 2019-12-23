@@ -34,6 +34,8 @@ object TerrestrialBiomeLayers {
 
         var biomes: LayerFactory<R> = AddBiomesLayer.create(contextProvider.apply(20L), layer)
         biomes = ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes)
+        biomes = AddVolcanicIslandsLayer.stack(2, contextProvider, 1000L, biomes)
+        biomes = ExpandVolcanicIslandsLayer.stack(4, contextProvider, 1002L, biomes)
         biomes = AddVariantsLayer.create(contextProvider.apply(30L), biomes)
         biomes = EaseBiomeEdgeLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
         biomes = AddHillsLayer.INSTANCE.create(contextProvider.apply(100L), biomes, ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes))
