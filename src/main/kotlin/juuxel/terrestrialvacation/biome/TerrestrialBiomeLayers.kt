@@ -40,6 +40,7 @@ object TerrestrialBiomeLayers {
         biomes = EaseBiomeEdgeLayer.INSTANCE.create(contextProvider.apply(1000L), biomes)
         biomes = AddHillsLayer.INSTANCE.create(contextProvider.apply(100L), biomes, ScaleLayer.NORMAL.stack(2, contextProvider, 1000L, biomes))
         biomes = AddEdgeBiomesLayer.INSTANCE.create(contextProvider.apply(100L), biomes)
+        biomes = SmoothenShorelineLayer.INSTANCE.stack(2, contextProvider, 5L, biomes)
 
         for (i in 0..3) {
             biomes = ScaleLayer.NORMAL.create(contextProvider.apply(1000L + i), biomes)

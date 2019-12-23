@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "D#D",
+    "#O#",
+    "D#D"
+  ],
+  "key": {
+    "#": { "tag": "minecraft:saplings" },
+    "D": { "item": "minecraft:diamond" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": {
+    "item": "terrestrial_vacation:biome_rift_portal",
+    "count": 1
+  }
+}

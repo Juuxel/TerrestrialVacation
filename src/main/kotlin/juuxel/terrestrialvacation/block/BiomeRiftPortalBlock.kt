@@ -1,7 +1,7 @@
 package juuxel.terrestrialvacation.block
 
 import juuxel.terrestrialvacation.dimension.BiomeRiftDimension
-import juuxel.terrestrialvacation.dimension.TopPlacer
+import juuxel.terrestrialvacation.dimension.SpawnPlacer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions
@@ -26,7 +26,7 @@ class BiomeRiftPortalBlock(settings: Settings) : Block(settings) {
             if (world.dimension.type !== BiomeRiftDimension.TYPE) {
                 FabricDimensions.teleport(player, BiomeRiftDimension.TYPE)
             } else {
-                FabricDimensions.teleport(player, DimensionType.OVERWORLD, TopPlacer)
+                FabricDimensions.teleport(player, DimensionType.OVERWORLD, SpawnPlacer)
             }
         }
         return ActionResult.SUCCESS
