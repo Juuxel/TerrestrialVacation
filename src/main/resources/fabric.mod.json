@@ -15,7 +15,7 @@
   },
 
   "license": "LGPL-3.0-only",
-  "icon": "assets/beeangry-est/icon.png",
+  "icon": "assets/terrestrial_vacation/icon.png",
 
   "environment": "*",
   "entrypoints": {

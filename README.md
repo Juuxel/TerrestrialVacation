@@ -1,7 +1,7 @@
-<img src="src/main/resources/assets/beeangry-est/icon.png" align="left" width="180px"/>
+<img src="icon.png" align="left" width="180px"/>
 
-# Bee Angry-est
+# Terrestrial Vacation
 
-[![](https://img.shields.io/github/license/Juuxel/BeeAngry-est.svg)](COPYING) [![](https://img.shields.io/github/release/Juuxel/BeeAngry-est.svg)](https://github.com/Juuxel/BeeAngry-est/releases) ![](https://img.shields.io/badge/minecraft-1.15-blueviolet.svg)
+[![](https://img.shields.io/github/license/Juuxel/TerrestrialVacation.svg)](COPYING) [![](https://img.shields.io/github/release/Juuxel/TerrestrialVacation.svg)](https://github.com/Juuxel/TerrestrialVacation/releases) ![](https://img.shields.io/badge/minecraft-1.15-blueviolet.svg)
 
-*Makes bees angrier!* • [Downloads](https://github.com/Juuxel/BeeAngry-est/releases)
+*Take a vacation in a terrestrial world!* • [Downloads](https://github.com/Juuxel/TerrestrialVacation/releases)
