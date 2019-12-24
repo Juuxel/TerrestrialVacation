@@ -3,7 +3,6 @@ package juuxel.terrestrialvacation.biome
 import juuxel.terrestrialvacation.biome.fabric.WeightedBiomePicker
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.biome.Biome
 import java.util.*
 
@@ -14,9 +13,6 @@ object Climates {
     private val pickers: EnumMap<OverworldClimate, WeightedBiomePicker> = EnumMap(OverworldClimate::class.java)
 
     fun add(biome: Biome, climate: OverworldClimate, weight: Double) {
-        if (Registry.BIOME.getId(biome)?.namespace == "thehallow")
-            throw IllegalArgumentException("blocked attack from the haunted dimension mod")
-
         pickers.getOrPut(climate) { WeightedBiomePicker() }.addBiome(biome, weight)
     }
 
