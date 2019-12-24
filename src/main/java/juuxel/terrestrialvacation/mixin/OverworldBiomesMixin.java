@@ -25,4 +25,14 @@ public class OverworldBiomesMixin {
             }
         }
     }
+
+    @Inject(method = "addBiomeVariant", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void onAddBiomeVariant(Biome replaced, Biome variant, double chance, OverworldClimate[] climates, CallbackInfo info) {
+        if (!Config.get().isOverworldGenerationDisabled()) return;
+        boolean hasOtherBase = TerrestrialVacation.INSTANCE.isOtherBiome(Registry.BIOME.getId(replaced));
+        boolean hasTerraformerVariant = TerrestrialVacation.INSTANCE.isTerraformerBiome(Registry.BIOME.getId(variant));
+        if (hasOtherBase && hasTerraformerVariant) {
+            info.cancel();
+        }
+    }
 }
