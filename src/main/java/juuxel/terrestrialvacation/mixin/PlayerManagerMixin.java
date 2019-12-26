@@ -25,7 +25,7 @@ public class PlayerManagerMixin {
     @ModifyVariable(method = "respawnPlayer", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/server/network/ServerPlayerEntity;getSpawnPosition()Lnet/minecraft/util/math/BlockPos;", ordinal = 0), ordinal = 0)
     private BlockPos getDimensionalSpawnPoint(BlockPos pos, ServerPlayerEntity player, DimensionType dimension, boolean alive) {
         return Objects.requireNonNull(
-                DimensionalSpawnPoints.get(player, dimension),
+                DimensionalSpawnPoints.get(player, dimension, false),
                 () -> "[TerrestrialVacation] Spawn point not found for dimension '" + Registry.DIMENSION.getId(dimension) + '\''
         );
     }

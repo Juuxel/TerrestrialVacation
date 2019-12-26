@@ -4,7 +4,10 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "OverworldBiomesMixin",
-    "PlayerManagerMixin"
+    "PlayerEntityMixin",
+    "PlayerManagerMixin",
+    "ServerWorldMixin",
+    "WorldMixin"
   ],
   "client": [
   ],

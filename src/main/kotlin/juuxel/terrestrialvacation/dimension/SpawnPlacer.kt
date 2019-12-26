@@ -1,5 +1,6 @@
 package juuxel.terrestrialvacation.dimension
 
+import juuxel.terrestrialvacation.component.DimensionalSpawnPoints
 import net.fabricmc.fabric.api.dimension.v1.EntityPlacer
 import net.minecraft.block.pattern.BlockPattern
 import net.minecraft.entity.Entity
@@ -17,7 +18,7 @@ object SpawnPlacer : EntityPlacer {
         horizontalOffset: Double, verticalOffset: Double
     ): BlockPattern.TeleportTarget {
         return if (teleported is PlayerEntity) {
-            val pos = teleported.spawnPosition ?: destination.spawnPos
+            val pos = DimensionalSpawnPoints[teleported, destination.dimension.type] ?: destination.spawnPos
             BlockPattern.TeleportTarget(Vec3d(pos), Vec3d.ZERO, 0)
         } else {
             TopPlacer.placeEntity(teleported, destination, portalDir, horizontalOffset, verticalOffset)

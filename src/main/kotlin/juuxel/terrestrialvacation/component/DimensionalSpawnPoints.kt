@@ -25,7 +25,6 @@ interface DimensionalSpawnPoints : Component {
          * Returns `null` if the spawn position is not present.
          */
         @JvmStatic
-        @JvmOverloads
         operator fun get(player: PlayerEntity, dimension: DimensionType, ignoreOverworldDefault: Boolean = false): BlockPos? {
             val spawnPos = Lib.DIMENSIONAL_SPAWN_POINTS[player][dimension]
 
