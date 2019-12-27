@@ -24,7 +24,6 @@ class BiomeRiftDimension(world: World, private val type: DimensionType) : Overwo
         )
 
     companion object {
-        @JvmField
         val TYPE: DimensionType = FabricDimensionType.builder()
             .factory(::BiomeRiftDimension)
             .biomeAccessStrategy(HorizontalVoronoiBiomeAccessType.INSTANCE)
@@ -32,7 +31,6 @@ class BiomeRiftDimension(world: World, private val type: DimensionType) : Overwo
             .buildAndRegister(TerrestrialVacation.id("biome_rift"))
 
         fun init() {
-
         }
     }
 }

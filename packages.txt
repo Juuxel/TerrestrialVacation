@@ -1,0 +1,10 @@
+pawn
+bishop
+knight
+castle
+queen
+king
+checkmate
+enpassant
+promotion
+stalemate

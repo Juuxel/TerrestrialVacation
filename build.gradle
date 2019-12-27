@@ -1,5 +1,20 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "CottonMC"
+            url = "http://server.bbkr.space:8081/artifactory/libs-release"
+        }
+    }
+
+    dependencies {
+        classpath "net.sf.proguard:proguard-gradle:6.2.2"
+        classpath "io.github.cottonmc:proguard-mappings-parser:1.2.0"
+    }
+}
+
 plugins {
     id 'fabric-loom' version '0.2.7-SNAPSHOT'
     id 'maven-publish'
@@ -102,5 +117,112 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
         // mavenLocal()
+    }
+}
+
+task deleteProguard(type: Delete) {
+    afterEvaluate {
+        delete tasks.proguard.outJarFiles
+    }
+}
+
+def proguardMappingsFile = new File(project.buildDir, "proguard/mappings.txt")
+
+task proguard(type: proguard.gradle.ProGuardTask) {
+    dependsOn jar//, deleteProguard
+    injars(jar.outputs.files)
+    outjars(new File(project.buildDir, "proguard/output.jar"))
+    printmapping(proguardMappingsFile)
+    forceprocessing()
+    verbose()
+
+    keep(allowobfuscation: true, 'class juuxel.terrestrialvacation.mixin.* {\
+        *;\
+    }')
+
+    keep(allowobfuscation: true, 'class juuxel.terrestrialvacation.TerrestrialVacation {\
+        public void init();\
+    }')
+
+    keep(allowobfuscation: true, 'class juuxel.terrestrialvacation.dimension.BiomeRiftDimension$Companion {\
+        public void init();\
+    }')
+    
+    keepclassmembers 'class juuxel.terrestrialvacation.TerrestrialVacation {\
+        public static juuxel.terrestrialvacation.TerrestrialVacation INSTANCE;\
+        public void init();\
+    }'
+
+    assumenosideeffects 'class kotlin.jvm.internal.Intrinsics {\
+        static void checkParameterIsNotNull(java.lang.Object, java.lang.String);\
+        static void checkExpressionValueIsNotNull(java.lang.Object, java.lang.String);\
+    }'
+
+//    repackageclasses 'juuxel.terrestrialvacation'
+    flattenpackagehierarchy 'juuxel.chessmod'
+//    keeppackagenames 'juuxel.terrestrialvacation.mixin'
+    obfuscationdictionary(file('members.txt'))
+    classobfuscationdictionary(file('classes.txt'))
+    packageobfuscationdictionary(file('packages.txt'))
+    keepattributes 'RuntimeVisibleAnnotations,RuntimeInvisibleAnnotations'
+    useuniqueclassmembernames()
+
+    afterEvaluate {
+        libraryjars(configurations.runtimeClasspath.files)
+        libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+    }
+}
+
+task remapProguardJar(type: net.fabricmc.loom.task.RemapJarTask) {
+    dependsOn proguard
+    input = tasks.proguard.outJarFiles[0]
+    classifier = 'proguard-dev'
+    addNestedDependencies = true
+}
+
+import io.github.cottonmc.proguardparser.*
+
+class MappingsHolder {
+    static ProjectMapping mappings = null
+}
+ProjectMapping getMappings() {
+    if (MappingsHolder.mappings == null) {
+        MappingsHolder.mappings = ParserKt.parseProguardMappings(new File(project.buildDir, "proguard/mappings.txt").readLines())
+    }
+
+    return MappingsHolder.mappings
+}
+
+task renamedProguardJar(type: Jar) {
+    dependsOn remapProguardJar
+    archiveClassifier = 'proguard'
+
+    afterEvaluate {
+        for (Object o : remapProguardJar.outputs.files) {
+            from(project.zipTree(o)) {
+                exclude 'fabric.mod.json', 'mixins.terrestrial_vacation.json'
+            }
+
+            from(project.zipTree(o)) {
+                include 'fabric.mod.json'
+                filter {
+                    def newClass = getMappings().findClass("juuxel.terrestrialvacation.TerrestrialVacation")
+                    def newInit = newClass.findMethod("init", "void")
+                    it.replaceAll("$newClass.from::$newInit.from", "$newClass.to::$newInit.to")
+                }
+            }
+
+            from(project.zipTree(o)) {
+                include 'mixins.terrestrial_vacation.json'
+                filter {
+                    def newPackage = getMappings().findPackage("juuxel.terrestrialvacation.mixin")
+                    def result = it.replaceAll("juuxel\\.terrestrialvacation\\.mixin", newPackage)
+                    for (ClassMapping c : getMappings().findClassesInPackage("juuxel.terrestrialvacation.mixin")) {
+                        result = result.replaceAll("\"$c.fromSimpleName\"", "\"$c.toSimpleName\"")
+                    }
+                    result
+                }
+            }
+        }
     }
 }
